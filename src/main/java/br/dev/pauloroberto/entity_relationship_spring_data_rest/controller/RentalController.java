@@ -8,10 +8,7 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRe
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CustomerRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.RentalRepository;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/rentals")
@@ -28,7 +25,7 @@ public class RentalController {
 
     @PostMapping
     @Transactional
-    public void create(@RequestBody RentalDto rentalDto) {
+    public void rent(@RequestBody RentalDto rentalDto) {
         Car car = carRepository.findByLicenseNumber(rentalDto.licenseNumber());
         Customer customer = customerRepository.findById(rentalDto.customerId()).orElseThrow();
 
@@ -37,5 +34,14 @@ public class RentalController {
         } else {
             throw new RuntimeException("Car is not available");
         }
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void returnCar (@RequestBody @PathVariable Long id) {
+        Rental rental = rentalRepository.findById(id).orElseThrow();
+        Car car = carRepository.findById(rental.getCar().getId()).orElseThrow();
+        car.setAvailable(true);
+        carRepository.save(car);
     }
 }
