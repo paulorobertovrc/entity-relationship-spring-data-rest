@@ -24,13 +24,13 @@ public class Customer {
     @Column(nullable = false)
     private String email;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "address_id")
-    @RestResource(path = "customerAddress", rel = "address")
+    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Relacionamento com a tabela Address (Um para Um) // CascadeType.PERSIST: quando um cliente for salvo, o endereço também será salvo
+    @JoinColumn(name = "address_id", referencedColumnName = "id")
+    @RestResource(path = "customerAddress", rel = "address") // Altera o nome do endpoint para /customerAddress
     private Address address;
 
     @ManyToMany
-    @RestResource(path = "customerRentals", rel = "rentals")
+    @RestResource(path = "customerRentals", rel = "rentals") // Altera o nome do endpoint para /customerRentals
     private List<Rental> rentals;
 
     public Customer(CustomerDto customerDto) {
@@ -52,5 +52,21 @@ public class Customer {
 
     public void setAddress(Address address) {
         this.address = address;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public Address getAddress() {
+        return address;
     }
 }

@@ -1,16 +1,20 @@
 package br.dev.pauloroberto.entity_relationship_spring_data_rest.model;
 
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.AddressDto;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 public class Address {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
+    @JsonIgnore // Ignora o campo no retorno do JSON
     private Long id;
 
     @Column
@@ -34,7 +38,11 @@ public class Address {
     @Column
     private String uf;
 
-    @OneToOne(mappedBy = "address")
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Relacionamento com a tabela Customer (Muitos para Um)
+    // CascadeType.ALL: quando um endereço for salvo, o cliente também será salvo
+    // FetchType.LAZY: quando um cliente for buscado, não será buscado os endereços dele // FetchType.EAGER: quando um cliente for buscado, será buscado os endereços dele
+    @JoinColumn(name = "customer_id", referencedColumnName = "id") // nome da coluna na tabela de endereço que referencia a tabela de cliente
+    @JsonIgnore // Ignora o campo no retorno do JSON
     private Customer customer;
 
     public Address(AddressDto address) {
