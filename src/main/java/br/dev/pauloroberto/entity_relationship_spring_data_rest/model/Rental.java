@@ -3,18 +3,14 @@ package br.dev.pauloroberto.entity_relationship_spring_data_rest.model;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.RentalDto;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
-import lombok.ToString;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
-
-import java.util.List;
 
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
 @EqualsAndHashCode(of = "id")
 @ToString
 public class Rental {
