@@ -3,6 +3,7 @@ package br.dev.pauloroberto.entity_relationship_spring_data_rest.controller;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarDto;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Car;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
+import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -20,7 +21,7 @@ public class CarController {
 
     @PostMapping
     @Transactional
-    public void create(@RequestBody CarDto carDto) {
+    public void create(@RequestBody @Valid CarDto carDto) {
         carRepository.save(new Car(carDto));
     }
 }

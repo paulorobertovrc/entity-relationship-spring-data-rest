@@ -7,6 +7,7 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Rental;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CustomerRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.RentalRepository;
+import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -25,7 +26,7 @@ public class RentalController {
 
     @PostMapping
     @Transactional
-    public void rent(@RequestBody RentalDto rentalDto) {
+    public void rent(@RequestBody @Valid RentalDto rentalDto) {
         Car car = carRepository.findByLicenseNumber(rentalDto.licenseNumber());
         Customer customer = customerRepository.findById(rentalDto.customerId()).orElseThrow();
 
