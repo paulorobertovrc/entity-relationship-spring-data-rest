@@ -2,7 +2,10 @@ package br.dev.pauloroberto.entity_relationship_spring_data_rest.model;
 
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CustomerDto;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.rest.core.annotation.RestResource;
 
 import java.util.List;
@@ -33,46 +36,21 @@ public class Customer {
     public Customer(CustomerDto customerDto) {
         this.name = customerDto.name();
         this.email = customerDto.email();
-        this.address = new Address(customerDto.address());
-    }
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
+        if (customerDto.address() != null) {
+            this.address = new Address(customerDto.address());
+        }
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
     public void setEmail(String email) {
         this.email = email;
     }
 
-    public Address getAddress() {
-        return address;
-    }
-
     public void setAddress(Address address) {
         this.address = address;
-    }
-
-    public List<Rental> getRentals() {
-        return rentals;
-    }
-
-    public void setRentals(List<Rental> rentals) {
-        this.rentals = rentals;
     }
 }
