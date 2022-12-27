@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @AllArgsConstructor
@@ -20,11 +22,13 @@ public class Rental {
 
     @Fetch(FetchMode.SELECT)
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION) // Não deleta o carro quando a locação for deletada
     @JoinColumn(name = "car_id")
     private Car car;
 
     @Fetch(FetchMode.SELECT)
     @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    @OnDelete(action = OnDeleteAction.NO_ACTION) // Não deleta o cliente quando a locação for deletada
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
