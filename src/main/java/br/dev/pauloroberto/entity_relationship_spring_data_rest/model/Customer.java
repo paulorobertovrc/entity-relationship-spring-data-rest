@@ -28,7 +28,7 @@ public class Customer {
     @Column (nullable = false)
     private boolean active;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Relacionamento com a tabela Address (Um para Um) // CascadeType.PERSIST: quando um cliente for salvo, o endereço também será salvo
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER) // Relacionamento com a tabela Address (Um para Um) // CascadeType.PERSIST: quando um cliente for salvo, o endereço também será salvo
     @OnDelete(action = OnDeleteAction.NO_ACTION) // Não deleta o endereço quando o cliente for deletado
     @JoinColumn(name = "address_id", referencedColumnName = "id")
     @RestResource(path = "customerAddress", rel = "address") // Altera o nome do endpoint para /customerAddress
