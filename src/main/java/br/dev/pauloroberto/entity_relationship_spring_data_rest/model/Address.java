@@ -6,8 +6,6 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 @Entity
 @NoArgsConstructor
@@ -39,14 +37,6 @@ public class Address {
 
     @Column
     private String uf;
-
-    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY) // Relacionamento com a tabela Customer (Muitos para Um)
-    // CascadeType.ALL: quando um endereço for salvo, o cliente também será salvo
-    // FetchType.LAZY: quando um cliente for buscado, não será buscado os endereços dele // FetchType.EAGER: quando um cliente for buscado, será buscado os endereços dele
-    @OnDelete(action = OnDeleteAction.NO_ACTION) // Não deleta o cliente quando o endereço for deletado
-    @JoinColumn(name = "customer_id", referencedColumnName = "id") // nome da coluna na tabela de endereço que referencia a tabela de cliente
-    @JsonIgnore // Ignora o campo no retorno do JSON
-    private Customer customer;
 
     public Address(AddressDto address) {
             this.logradouro = address.logradouro();
