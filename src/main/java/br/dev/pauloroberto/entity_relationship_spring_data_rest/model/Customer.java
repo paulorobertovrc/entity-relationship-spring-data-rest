@@ -34,8 +34,7 @@ public class Customer {
     @RestResource(path = "customerAddress", rel = "address") // Altera o nome do endpoint para /customerAddress
     private Address address;
 
-    @ManyToMany
-    @OnDelete(action = OnDeleteAction.NO_ACTION) // Não deleta o produto quando o cliente for deletado
+    @OneToMany
     @RestResource(path = "customerRentals", rel = "rentals") // Altera o nome do endpoint para /customerRentals
     private List<Rental> rentals;
 
