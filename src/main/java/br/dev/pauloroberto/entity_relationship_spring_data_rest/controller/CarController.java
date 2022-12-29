@@ -1,27 +1,53 @@
 package br.dev.pauloroberto.entity_relationship_spring_data_rest.controller;
 
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarDto;
+import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarUpdateDto;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Car;
-import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
+import br.dev.pauloroberto.entity_relationship_spring_data_rest.service.CarService;
 import jakarta.validation.Valid;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/cars")
 public class CarController {
-    private final CarRepository carRepository;
+    private final CarService carService;
 
-    public CarController(CarRepository carRepository) {
-        this.carRepository = carRepository;
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
 
     @PostMapping
     @Transactional
     public void create(@RequestBody @Valid CarDto carDto) {
-        carRepository.save(new Car(carDto));
+        carService.create(carDto);
+    }
+
+    @GetMapping
+    public Iterable<Car> list() {
+        return carService.list();
+    }
+
+    @GetMapping("/{id}")
+    public Car list(@PathVariable Long id) {
+        return carService.list(id);
+    }
+
+    @PutMapping("/{id}")
+    @Transactional
+    public void update(@PathVariable Long id, @RequestBody @Valid CarUpdateDto carUpdateDto) {
+        carService.update(id, carUpdateDto);
+    }
+
+    @PutMapping("/{id}/activate")
+    @Transactional
+    public void activate(@PathVariable Long id) {
+        carService.activate(id);
+    }
+
+    @DeleteMapping("/{id}")
+    @Transactional
+    public void delete(@PathVariable Long id) {
+        carService.delete(id);
     }
 }
