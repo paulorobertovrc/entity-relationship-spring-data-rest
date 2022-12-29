@@ -9,6 +9,9 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.Custo
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.RentalRepository;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Service
 public class RentalService {
     private final RentalRepository rentalRepository;
@@ -34,6 +37,7 @@ public class RentalService {
 
     public void finishRental(Long id) {
         Rental rental = rentalRepository.findById(id).orElseThrow();
+        rental.setEndDate(new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss").format(new Date()));
         Car car = carRepository.findById(rental.getCar().getId()).orElseThrow();
         car.setAvailable(true);
         carRepository.save(car);

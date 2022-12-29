@@ -9,10 +9,14 @@ import org.hibernate.annotations.FetchMode;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Getter
+@Setter
 @EqualsAndHashCode(of = "id")
 @ToString
 public class Rental {
@@ -32,9 +36,16 @@ public class Rental {
     @JoinColumn(name = "customer_id")
     private Customer customer;
 
+    @Column
+    private String startDate;
+
+    @Column
+    private String endDate;
+
     public Rental(RentalDto rentalDto, Customer customer, CarRepository carRepository) {
         this.customer = customer;
         this.car = carRepository.findByLicenseNumber(rentalDto.licenseNumber());
         this.car.setAvailable(false);
+        this.startDate = new SimpleDateFormat("dd/MM/yyyy_HH:mm:ss").format(new Date());
     }
 }
