@@ -6,6 +6,8 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Address;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Customer;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.AddressRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CustomerRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -22,8 +24,8 @@ public class CustomerService {
         customerRepository.save(new Customer(customerDto));
     }
 
-    public Iterable<Customer> list() {
-        return customerRepository.findAllByActiveTrue();
+    public Page<Customer> list(Pageable pageable) {
+        return customerRepository.findAllByActiveTrue(pageable);
     }
 
     public Customer list(Long id) {

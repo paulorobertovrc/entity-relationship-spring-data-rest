@@ -5,6 +5,7 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarUpdateDto
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Car;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +20,8 @@ public class CarService {
         carRepository.save(new Car(carDto));
     }
 
-    public Iterable<Car> list() {
-        return carRepository.findAll();
+    public Iterable<Car> list(Pageable pageable) {
+        return carRepository.findAll(pageable);
     }
 
     public Car list(Long id) {

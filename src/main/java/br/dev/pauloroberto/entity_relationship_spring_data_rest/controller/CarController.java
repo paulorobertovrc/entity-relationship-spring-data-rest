@@ -5,6 +5,8 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarUpdateDto
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Car;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.service.CarService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,8 @@ public class CarController {
     }
 
     @GetMapping
-    public Iterable<Car> list() {
-        return carService.list();
+    public Iterable<Car> list(@PageableDefault(size = 5) Pageable pageable) {
+        return carService.list(pageable);
     }
 
     @GetMapping("/{id}")

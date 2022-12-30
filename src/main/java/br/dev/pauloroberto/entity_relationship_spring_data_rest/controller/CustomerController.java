@@ -5,6 +5,8 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CustomerUpda
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Customer;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.service.CustomerService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -24,8 +26,9 @@ public class CustomerController {
     }
 
     @GetMapping
-    public Iterable<Customer> list() {
-        return customerService.list();
+    public Iterable<Customer> list(@PageableDefault(size = 5, sort = {"name"}) Pageable pageable) {
+        // The Pageable object is automatically created by Spring Data Rest based on the request parameters (page, size, sort) sent by the client (browser)
+        return customerService.list(pageable);
     }
 
     @GetMapping("/{id}")

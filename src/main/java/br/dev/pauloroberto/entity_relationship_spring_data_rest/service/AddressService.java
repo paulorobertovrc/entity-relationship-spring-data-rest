@@ -3,6 +3,8 @@ package br.dev.pauloroberto.entity_relationship_spring_data_rest.service;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.AddressDto;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Address;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.AddressRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,8 +19,8 @@ public class AddressService {
         addressRepository.save(new Address(address));
     }
 
-    public Iterable<Address> list() {
-        return addressRepository.findAll();
+    public Page<Address> list(Pageable pageable) {
+        return addressRepository.findAll(pageable);
     }
 
     public Address list(Long id) {

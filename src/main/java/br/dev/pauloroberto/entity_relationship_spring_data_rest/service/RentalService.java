@@ -7,6 +7,7 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Rental;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CarRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.CustomerRepository;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.repository.RentalRepository;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.text.SimpleDateFormat;
@@ -43,7 +44,7 @@ public class RentalService {
         carRepository.save(car);
     }
 
-    public Iterable<Rental> list() {
-        return rentalRepository.findAll();
+    public Iterable<Rental> list(Pageable pageable) {
+        return rentalRepository.findAll(pageable);
     }
 }

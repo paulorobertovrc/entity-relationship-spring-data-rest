@@ -4,6 +4,8 @@ import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.RentalDto;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Rental;
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.service.RentalService;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +25,8 @@ public class RentalController {
     }
 
     @GetMapping
-    public Iterable<Rental> list() {
-        return rentalService.list();
+    public Iterable<Rental> list(@PageableDefault(size = 5) Pageable pageable) {
+        return rentalService.list(pageable);
     }
 
     @PutMapping("/{id}")
