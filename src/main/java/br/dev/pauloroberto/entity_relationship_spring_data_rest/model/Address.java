@@ -6,11 +6,13 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Setter
 public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto increment
@@ -39,12 +41,12 @@ public class Address {
     private String uf;
 
     public Address(AddressDto address) {
-            this.logradouro = address.logradouro();
-            this.numero = address.numero();
-            this.complemento = address.complemento();
-            this.bairro = address.bairro();
-            this.cep = address.cep();
-            this.cidade = address.cidade();
-            this.uf = address.uf();
+        this.logradouro = address.logradouro();
+        this.numero = address.numero();
+        this.complemento = address.complemento();
+        this.bairro = address.bairro();
+        this.cep = address.cep();
+        this.cidade = address.cidade();
+        this.uf = address.uf();
     }
 }
