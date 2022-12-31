@@ -2,6 +2,7 @@ package br.dev.pauloroberto.entity_relationship_spring_data_rest.model;
 
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.dto.CarDto;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
 import lombok.*;
 
 @Entity
@@ -19,7 +20,7 @@ public class Car {
     private String licenseNumber;
     private Brand brand;
     private String model;
-    private String color;
+    private @NotBlank Color color;
     @Column(nullable = false)
     private boolean available;
 

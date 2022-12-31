@@ -1,6 +1,7 @@
 package br.dev.pauloroberto.entity_relationship_spring_data_rest.dto;
 
 import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Brand;
+import br.dev.pauloroberto.entity_relationship_spring_data_rest.model.Color;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
@@ -14,7 +15,7 @@ public record CarDto(
         @NotBlank
         String model,
         @NotBlank
-        String color,
+        Color color,
         boolean available
 ) {
 }
