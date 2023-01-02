@@ -14,7 +14,7 @@ public record CarDto(
         Brand brand,
         @NotBlank
         String model,
-        @NotBlank
+        @NotNull
         Color color,
         boolean available
 ) {

@@ -9,8 +9,6 @@ public record CarUpdateDto(
         @Pattern(regexp = "(^$)|([A-Z]{3}-\\d{4})") // Checks if the field is a valid license plate
         String licenseNumber,
         @NotNull @RequestParam(required = false)
-        String model,
-        @NotNull @RequestParam(required = false)
-        String color
+        String model
 ) {
 }

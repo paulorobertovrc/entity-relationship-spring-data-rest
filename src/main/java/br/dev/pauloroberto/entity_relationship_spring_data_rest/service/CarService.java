@@ -40,10 +40,6 @@ public class CarService {
                 car.setModel(carUpdateDto.model());
             }
 
-            if (!carUpdateDto.color().isEmpty()) {
-                car.setColor(carUpdateDto.color());
-            }
-
             if (!carUpdateDto.licenseNumber().isEmpty()) {
                 car.setLicenseNumber(carUpdateDto.licenseNumber());
             }
