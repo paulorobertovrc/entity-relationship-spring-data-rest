@@ -86,6 +86,11 @@ As tabelas do banco de dados foram parcialmente normalizadas da seguinte forma:
 ## Swagger
 Esta API utilizou o Swagger para geração automática de documentação, a qual pode ser acessada em ```http://localhost:8080/swagger-ui.html```.
 
+<img width="1435" alt="Captura de Tela 2023-01-02 às 18 45 02" src="https://user-images.githubusercontent.com/70707151/210365827-43784758-8acb-4b7d-b4eb-038873164102.png">
+<img width="1435" alt="Captura de Tela 2023-01-02 às 18 45 18" src="https://user-images.githubusercontent.com/70707151/210365853-6d2990cd-f416-4146-aedd-a420a254ef73.png">
+<img width="1436" alt="Captura de Tela 2023-01-02 às 18 45 32" src="https://user-images.githubusercontent.com/70707151/210365983-3526d654-4ada-482a-b1c7-b51a482bdd0c.png">
+<img width="1439" alt="Captura de Tela 2023-01-02 às 18 45 47" src="https://user-images.githubusercontent.com/70707151/210365994-ab2ddad8-efb3-4e04-a308-f67a8640d3c4.png">
+
 ----------
 
 # A mini-project to improve notions of entity relationships using the Spring Data JPA framework and API documentation with Swagger
